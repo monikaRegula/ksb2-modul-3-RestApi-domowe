@@ -6,6 +6,7 @@ import pl.regula.ksb2modul3restapidomowe.entity.Vehicle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class VehicleService {
@@ -42,6 +43,10 @@ public class VehicleService {
 
     public List<Vehicle> findAllVehicles() {
         return vehicleList;
+    }
+
+    public List<Vehicle> findAllVehiclesByColor(String color) {
+        return vehicleList.stream().filter(vehicle -> vehicle.getColor().equalsIgnoreCase(color)).collect(Collectors.toList());
     }
 
     public Optional<Vehicle> updateVehicle(Vehicle newVehicle) {

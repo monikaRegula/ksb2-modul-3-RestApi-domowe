@@ -16,22 +16,19 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 
 @RestController
 @RequestMapping("/vehicles")
-public class VehicleConroller {
+public class VehicleController {
 
     private VehicleService service;
 
-    public VehicleConroller(VehicleService service) {
+    public VehicleController(VehicleService service) {
         this.service = service;
     }
 
-
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-//    @RequestMapping("/{all}")
-    //fixme
     public ResponseEntity<CollectionModel<Vehicle>> getVehicles() {
         List<Vehicle> vehicleList = service.findAllVehicles();
-        vehicleList.forEach(v -> v.addIf(!v.hasLinks(), ()-> linkTo(VehicleConroller.class).slash(v.getId()).withSelfRel()));
-        Link link = linkTo(VehicleConroller.class).withSelfRel();
+        vehicleList.forEach(v -> v.addIf(!v.hasLinks(), ()-> linkTo(VehicleController.class).slash(v.getId()).withSelfRel()));
+        Link link = linkTo(VehicleController.class).withSelfRel();
         return new ResponseEntity<>( new CollectionModel(vehicleList, link), HttpStatus.OK);
     }
 
@@ -45,15 +42,20 @@ public class VehicleConroller {
         }).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    //fixme
-//    @GetMapping
-//    public ResponseEntity<List<Vehicle>> getVehicleByColor(@RequestParam(defaultValue = "") String color ) {
-//        List<Vehicle> vehicles = vehicleList.stream().filter(vehicle -> vehicle.getColor().equals(color)).collect(Collectors.toList());
-//        if (vehicles.size() != 0) {
-//            return new ResponseEntity<>(vehicles, HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
+    @GetMapping("/color/{color}")
+    //http://localhost:8080/vehicles/color/White
+    public ResponseEntity<CollectionModel<Vehicle>> getVehicleByColor(@PathVariable String color) {
+
+        List<Vehicle> vehicles = service.findAllVehiclesByColor(color);
+        if (vehicles.size() != 0) {
+            vehicles.forEach(car -> car.addIf(car.hasLinks(),()-> linkTo(VehicleController.class).slash("/color/"+car.getColor())
+                    .withRel("all colors")));
+            Link link = linkTo(VehicleController.class).withSelfRel();
+            CollectionModel<Vehicle> carCollection = new CollectionModel<>(vehicles, link);
+            return new ResponseEntity<>(carCollection, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
     @PostMapping
     public ResponseEntity addVehicle(@RequestBody Vehicle vehicle) {
@@ -92,7 +94,7 @@ public class VehicleConroller {
     }
 
     private void addLinkToVehicle(Vehicle vehicle) {
-        vehicle.add(linkTo(VehicleConroller.class).slash(vehicle.getId()).withSelfRel());
+        vehicle.add(linkTo(VehicleController.class).slash(vehicle.getId()).withSelfRel());
     }
 
 }
