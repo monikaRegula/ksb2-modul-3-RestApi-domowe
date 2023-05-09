@@ -1,9 +1,7 @@
 package pl.regula.ksb2modul3restapidomowe.entity;
 
 
-import org.springframework.hateoas.RepresentationModel;
-
-public class Vehicle extends RepresentationModel<Vehicle> {
+public class Vehicle {
 
     private Long id;
 

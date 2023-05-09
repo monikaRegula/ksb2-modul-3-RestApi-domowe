@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "cbb6d00c-94e8-47df-9c63-85fa9f43c4fc",
+		"name": "ksb2-vehicles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/vehicles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/vehicles",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles"
+					]
+				},
+				"description": "get all vehicles"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/vehicles/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/vehicles/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles",
+						"1"
+					]
+				},
+				"description": "Get Vehicle by Id"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/vehicles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : \"4\",\r\n    \"mark\" : \"Fiat\",\r\n    \"model\": \"126p\",\r\n    \"color\" : \"Red\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/vehicles",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles"
+					]
+				},
+				"description": "Add new Vehicle"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/vehicles/color/Red",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehicles/color/Red",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles",
+						"color",
+						"Red"
+					]
+				},
+				"description": "Get Vehicle By Color"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/vehicles",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : \"1\",\r\n    \"mark\" : \"Fiat\",\r\n    \"model\": \"126p\",\r\n    \"color\" : \"Red\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/vehicles/id/1/color/Black",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehicles/id/1/color/Black",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles",
+						"id",
+						"1",
+						"color",
+						"Black"
+					]
+				},
+				"description": "Modify Vehicle's color  by given Id "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/vehicles/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehicles/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicles",
+						"4"
+					]
+				},
+				"description": "Delete vehicle by id"
+			},
+			"response": []
+		}
+	]
+}

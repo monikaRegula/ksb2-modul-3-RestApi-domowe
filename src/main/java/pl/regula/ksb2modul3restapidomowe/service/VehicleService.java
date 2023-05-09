@@ -31,13 +31,16 @@ public class VehicleService {
     }
 
     public Optional<Vehicle> findById(Long vehicleId) {
-        return vehicleList.stream().filter(element -> element.getId() == vehicleId).findFirst();
+        Optional<Vehicle> first = vehicleList.stream().filter(element -> element.getId().equals(vehicleId)).findFirst();
+        return first;
     }
 
     public Optional<Vehicle> deletedById(Long vehicleId) {
         Optional<Vehicle> byId = findById(vehicleId);
-        vehicleList.remove(byId);
-        return findById(vehicleId);
+        if(byId.isPresent()){
+            vehicleList.remove(byId.get());
+        }
+        return byId;
 
     }
 

@@ -1,7 +1,5 @@
 package pl.regula.ksb2modul3restapidomowe.controller;
 
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +10,7 @@ import pl.regula.ksb2modul3restapidomowe.service.VehicleService;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
@@ -25,34 +22,27 @@ public class VehicleController {
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<CollectionModel<Vehicle>> getVehicles() {
+    public ResponseEntity<List<Vehicle>> getVehicles() {
         List<Vehicle> vehicleList = service.findAllVehicles();
-        vehicleList.forEach(v -> v.addIf(!v.hasLinks(), ()-> linkTo(VehicleController.class).slash(v.getId()).withSelfRel()));
-        Link link = linkTo(VehicleController.class).withSelfRel();
-        return new ResponseEntity<>( new CollectionModel(vehicleList, link), HttpStatus.OK);
+        return new ResponseEntity<>(vehicleList, HttpStatus.OK);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Vehicle> getVehicleById(@PathVariable long id) {
+    public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
         Optional<Vehicle> first = service.findById(id);
         return first.map(a -> {
-            addLinkToVehicle(a);
-            return ResponseEntity.ok(a);
-        }).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                    return ResponseEntity.ok(a);
+                })
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @GetMapping("/color/{color}")
     //http://localhost:8080/vehicles/color/White
-    public ResponseEntity<CollectionModel<Vehicle>> getVehicleByColor(@PathVariable String color) {
-
+    public ResponseEntity<List<Vehicle>> getVehicleByColor(@PathVariable String color) {
         List<Vehicle> vehicles = service.findAllVehiclesByColor(color);
         if (vehicles.size() != 0) {
-            vehicles.forEach(car -> car.addIf(car.hasLinks(),()-> linkTo(VehicleController.class).slash("/color/"+car.getColor())
-                    .withRel("all colors")));
-            Link link = linkTo(VehicleController.class).withSelfRel();
-            CollectionModel<Vehicle> carCollection = new CollectionModel<>(vehicles, link);
-            return new ResponseEntity<>(carCollection, HttpStatus.OK);
+            return new ResponseEntity<>(vehicles, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -61,7 +51,6 @@ public class VehicleController {
     public ResponseEntity addVehicle(@RequestBody Vehicle vehicle) {
         Optional<Vehicle> added = service.addVehicle(vehicle);
         return added.map(a -> {
-            addLinkToVehicle(a);
             return ResponseEntity.ok(a);
         }).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
@@ -69,32 +58,25 @@ public class VehicleController {
     @PutMapping
     public ResponseEntity modifyVehicle(@RequestBody Vehicle newVehicle) {
         Optional<Vehicle> first = service.updateVehicle(newVehicle);
-        return first.map(vehicle -> {
-            addLinkToVehicle(vehicle);
-            return ResponseEntity.ok(vehicle);
+        return first.map(a -> {
+            return ResponseEntity.ok(a);
         }).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @PatchMapping
-    public ResponseEntity<Vehicle> modifyVehicleColor(@RequestParam Long id, @RequestParam String color) {
+    @PatchMapping("/id/{id}/color/{color}")
+    public ResponseEntity<Vehicle> modifyVehicleColor(@PathVariable Long id, @PathVariable String color) {
         Optional<Vehicle> first = service.updateVehicleByColor(id, color);
         return first.map(vehicle -> {
-            addLinkToVehicle(vehicle);
             return ResponseEntity.ok(vehicle);
         }).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity removeVehicle(@PathVariable long id) {
+    public ResponseEntity removeVehicle(@PathVariable Long id) {
         Optional<Vehicle> first = service.deletedById(id);
         return first.map(vehicle -> {
-            addLinkToVehicle(vehicle);
             return ResponseEntity.ok(vehicle);
         }).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    }
-
-    private void addLinkToVehicle(Vehicle vehicle) {
-        vehicle.add(linkTo(VehicleController.class).slash(vehicle.getId()).withSelfRel());
     }
 
 }
