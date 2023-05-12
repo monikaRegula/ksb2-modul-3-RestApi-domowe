@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("/vehicles")
 public class VehicleController {
 
-    private VehicleService service;
+    private final VehicleService service;
 
     public VehicleController(VehicleService service) {
         this.service = service;
@@ -41,7 +41,7 @@ public class VehicleController {
     //http://localhost:8080/vehicles/color/White
     public ResponseEntity<List<Vehicle>> getVehicleByColor(@PathVariable String color) {
         List<Vehicle> vehicles = service.findAllVehiclesByColor(color);
-        if (vehicles.size() != 0) {
+        if (!vehicles.isEmpty()) {
             return new ResponseEntity<>(vehicles, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

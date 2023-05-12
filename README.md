@@ -23,4 +23,7 @@ zaimplementuj HATEOAS
 
 SwaggerUI -> http://localhost:8080/swagger-ui.html
 XML to Postman> Header Accept:application/xml
-
+====================================================
+Kolekcje postman z przykładowymi wywołaniami
+src/main/resources/ksb2-vehicles.postman_collection.json
+![img.png](img.png)
