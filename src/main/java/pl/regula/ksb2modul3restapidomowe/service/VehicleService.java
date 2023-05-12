@@ -1,7 +1,7 @@
 package pl.regula.ksb2modul3restapidomowe.service;
 
 import org.springframework.stereotype.Service;
-import pl.regula.ksb2modul3restapidomowe.entity.Vehicle;
+import pl.regula.ksb2modul3restapidomowe.model.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;

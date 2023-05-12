@@ -1,4 +1,4 @@
-package pl.regula.ksb2modul3restapidomowe.entity;
+package pl.regula.ksb2modul3restapidomowe.model;
 
 
 import org.springframework.hateoas.RepresentationModel;

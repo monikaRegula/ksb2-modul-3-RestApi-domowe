@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.regula.ksb2modul3restapidomowe.entity.Vehicle;
+import pl.regula.ksb2modul3restapidomowe.model.Vehicle;
 import pl.regula.ksb2modul3restapidomowe.service.VehicleService;
 
 import java.util.List;
