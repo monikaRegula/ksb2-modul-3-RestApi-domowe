@@ -1,5 +1,7 @@
-package pl.regula.ksb2modul3restapidomowe.entity;
+package pl.regula.ksb2modul3restapidomowe.model;
 
+
+import java.util.Date;
 
 public class Vehicle {
 
@@ -11,11 +13,14 @@ public class Vehicle {
 
     private String color;
 
-    public Vehicle(Long id, String mark, String model, String color) {
+    private Date productionDate;
+
+    public Vehicle(Long id, String mark, String model, String color, Date productionDate) {
         this.id = id;
         this.mark = mark;
         this.model = model;
         this.color = color;
+        this.productionDate = productionDate;
     }
 
     public Vehicle() {
@@ -52,4 +57,14 @@ public class Vehicle {
     public void setColor(String color) {
         this.color = color;
     }
+
+    public Date getProductionDate() {
+        return productionDate;
+    }
+
+    public void setProductionDate(Date productionDate) {
+        this.productionDate = productionDate;
+    }
+
+
 }
