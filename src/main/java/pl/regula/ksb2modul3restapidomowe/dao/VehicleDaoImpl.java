@@ -36,7 +36,6 @@ public class VehicleDaoImpl implements VehicleDao {
                 String.valueOf(elem.get("mark")),
                 String.valueOf(elem.get("model")),
                 String.valueOf(elem.get("color")),
-                //todo konwersja daty
                 (Date) elem.get("production_date")
         )));
         return vehicles;
@@ -56,4 +55,5 @@ public class VehicleDaoImpl implements VehicleDao {
         )));
         return vehicles;
     }
+
 }

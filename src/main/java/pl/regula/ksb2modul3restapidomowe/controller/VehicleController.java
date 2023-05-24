@@ -32,7 +32,6 @@ public class VehicleController {
     public ResponseEntity addVehicle(@RequestBody Vehicle vehicle) {
         int isAdded = service.addVehicle(vehicle);
         return ResponseEntity.ok(isAdded);
-        //fixme return ok and https status not found
     }
 
 
@@ -40,7 +39,6 @@ public class VehicleController {
     public ResponseEntity<List<Vehicle>> getVehiclesByProductionYearRange(@PathVariable Long start, @PathVariable Long end) {
         List<Vehicle> vehicles = service.findAllByProductionYearRange(start, end);
         return ResponseEntity.ok(vehicles);
-        //fixme return ok and https status not found
     }
 
 }

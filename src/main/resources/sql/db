@@ -1,0 +1,15 @@
+USE byczekmonia;
+CREATE TABLE `vehicles` (
+  `vehicle_id` int NOT NULL,
+  `mark` varchar(255) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `color` varchar(255) DEFAULT NULL,
+  `production_date` date DEFAULT NULL,
+  PRIMARY KEY (`vehicle_id`)
+)
+
+INSERT INTO `` (`vehicle_id`,`mark`,`model`,`color`,`production_date`) VALUES (1,'bmw','x6','black','2005-05-16');
+INSERT INTO `` (`vehicle_id`,`mark`,`model`,`color`,`production_date`) VALUES (2,'honda','civic','black','2010-05-16');
+INSERT INTO `` (`vehicle_id`,`mark`,`model`,`color`,`production_date`) VALUES (3,'seat','ibiza','black','2012-05-16');
+INSERT INTO `` (`vehicle_id`,`mark`,`model`,`color`,`production_date`) VALUES (4,'fiat','uno','black','2020-05-16');
+INSERT INTO `` (`vehicle_id`,`mark`,`model`,`color`,`production_date`) VALUES (5,'kia','sportage','black','2023-05-16');
