@@ -5,6 +5,7 @@ Pojazd ma mieć pola, które umożliwią przechowanie marki, modelu, koloru oraz
 —————————
 ![img_1.png](img_1.png)
 
+Link do frontendu: https://github.com/monikaRegula/ksb2-mvc-domowe-angular/tree/jdbc_1_domowe
 
 —————————
 
