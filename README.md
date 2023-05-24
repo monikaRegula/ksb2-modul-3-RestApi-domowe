@@ -1,29 +1,27 @@
-# ksb2-3
-Napisz REST API dla listy pojazdów. Pojazd będzie miał pola: id, mark, model, color.
-API które będzie obsługiwało metody webowe:
+# ksb2-7
+Napisz aplikacje, która z poziomu GUI pozwala na dodawanie i wyświetlanie pojazdów znajdujących się w bazie danych. 
+Pojazd ma mieć pola, które umożliwią przechowanie marki, modelu, koloru oraz daty produkcji. Stwórz formularz z poziomu, którego będzie możliwe na wyświetlanie pojazdów z konkretnego przedziału dat. Np. wyświetlenie wszystkich pojazdów w bazie, których data produkcji jest w zakresie 2010 – 2015.
 
-do pobierania wszystkich pozycji
-do pobierania elementu po jego id
-do pobierania elementów w określonym kolorze (query)
-do dodawania pozycji
-do modyfikowania pozycji
-do modyfikowania jednego z pól pozycji
-do usuwania jeden pozycji
-Przy starcie aplikacji mają dodawać się 3 pozycje.
+—————————
+![img_1.png](img_1.png)
+
 
 —————————
 
-Dla ambitnych:
+Schemat bazy danych stworzyłam tak:
 
-rozbuduj aplikacje o możliwość zwracania danych w postaci XML
-dodaj obsługę Swagger UI
-zaimplementuj HATEOAS
+![img_5.png](img_5.png)
 
-====================================================
+—————————
 
-SwaggerUI -> http://localhost:8080/swagger-ui.html
-XML to Postman> Header Accept:application/xml
-====================================================
-Kolekcje postman z przykładowymi wywołaniami
-src/main/resources/ksb2-vehicles.postman_collection.json
-![img.png](img.png)
+Dane wyeksportowałam w Mysql Workbench:
+
+![img_4.png](img_4.png)
+
+—————————
+
+Połączenie z bazą danych skonfirugowałam tak:
+
+![img_2.png](img_2.png)
+
+![img_3.png](img_3.png)
